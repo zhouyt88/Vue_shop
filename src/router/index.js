@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import axios from 'axios'
 import login from '../components/login.vue'
 import home from '../components/home.vue'
-// 配置公共的请求头
-axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
+import welcom from '../components/welcom.vue'
+
 Vue.use(VueRouter)
-Vue.prototype.$http = axios
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: login },
-  { path: '/home', component: home }
+  {
+    path: '/home', component: home, redirect: '/welcom', children: [{ path: '/welcom', component: welcom }]
+  }
 ]
 
 const router = new VueRouter({
