@@ -12,7 +12,7 @@
     </el-header>
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside :width="isCollapse?'64px':'201px'">
+      <el-aside :width="isCollapse?'64px':'200px'">
         <div @click="isCollapse = !isCollapse">| | |</div>
         <el-menu
           background-color="#666c64"
@@ -22,6 +22,7 @@
           :default-active="activePath"
           :collapse="isCollapse"
           :collapse-transition="false"
+          router
         >
           <el-submenu v-for="(item,index) in menulist" :key="item.id" :index="index+''">
             <template slot="title">
@@ -134,6 +135,12 @@ export default {
   .el-aside {
     box-sizing: border-box;
     background-color: #545c64;
+    .el-menu {
+      width: 100%;
+    }
+    .el-submenu {
+      width: 100%;
+    }
     > div {
       color: #fff;
       cursor: pointer;
@@ -143,6 +150,9 @@ export default {
     i {
       margin-right: 10px;
     }
+  }
+  .el-main {
+    background-color: #dfdfdf;
   }
 }
 </style>

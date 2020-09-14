@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import './plugins/element.js'
 import './assets/fonts/iconfont.css'
+import './assets/global.css'
 import axios from 'axios'
 
 // 配置公共的请求头
