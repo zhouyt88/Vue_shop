@@ -1,5 +1,6 @@
 <template>
   <div class="users-box">
+    <!-- 面包屑导航 -->
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>用户管理</el-breadcrumb-item>
@@ -69,7 +70,6 @@
         </el-table-column>
         <el-table-column label="操作">
           <template v-slot="scpoe">
-            {{scpoe.row.id}}
             <el-tooltip class="item" effect="dark" content="编辑" placement="top-start">
               <!-- 修改用户按钮 -->
               <el-button
@@ -77,6 +77,7 @@
                 type="primary"
                 class="el-icon-edit"
                 @click="getUserInfoById(scpoe.row.id)"
+                circle
               ></el-button>
             </el-tooltip>
             <!-- 修改用户弹出层 -->
@@ -105,11 +106,18 @@
                 <el-button type="primary" @click="editUser">确 定</el-button>
               </div>
             </el-dialog>
-            <el-tooltip class="item" effect="dark" content="删除" placement="top-start">
-              <el-button size="mini" type="danger" class="el-icon-delete"></el-button>
-            </el-tooltip>
+            <i></i>
             <el-tooltip class="item" effect="dark" content="设置角色" placement="top-start">
-              <el-button size="mini" type="warning" class="el-icon-setting"></el-button>
+              <el-button size="mini" type="warning" class="el-icon-setting" circle></el-button>
+            </el-tooltip>
+            <el-tooltip class="item" effect="dark" content="删除" placement="top-start">
+              <el-button
+                size="mini"
+                type="danger"
+                class="el-icon-delete"
+                @click="openDel(scpoe.row.id)"
+                circle
+              ></el-button>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -276,6 +284,31 @@ export default {
         this.getUserList()
         // 关闭对话框
         this.dialogFormVisibleEdit = false
+      })
+    },
+    // 打开删除提示框
+    openDel (id) {
+      this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        console.log(id)
+        const { data: res } = await this.$http.delete('users/' + id)
+        this.getUserList()
+        if (res.meta.status !== 200) {
+          return this.Message.error({ message: '删除失败!' })
+        }
+        console.log(res)
+        this.$Message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(() => {
+        this.$Message({
+          type: 'info',
+          message: '已取消删除'
+        })
       })
     }
   },
