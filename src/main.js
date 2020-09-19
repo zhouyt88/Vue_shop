@@ -5,7 +5,8 @@ import './plugins/element.js'
 import './assets/fonts/iconfont.css'
 import './assets/global.css'
 import axios from 'axios'
-
+import TreeTable from 'vue-table-with-tree-grid'
+Vue.component('tree-Table', TreeTable)
 // 配置公共的请求头
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 // 在请求头中挂在token令牌

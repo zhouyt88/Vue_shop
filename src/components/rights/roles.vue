@@ -70,7 +70,12 @@
         </el-table-column>
       </el-table>
       <!-- 分配权限的对话框 -->
-      <el-dialog :title="showRoleName+'的权限分配'" :visible.sync="dialogVisible" width="50%">
+      <el-dialog
+        :title="showRoleName+'的权限分配'"
+        :visible.sync="dialogVisible"
+        width="50%"
+        @close="DialogClosed"
+      >
         <el-tree
           :data="rightsList"
           show-checkbox
@@ -135,6 +140,8 @@ export default {
     },
     // 点击分配权限的按钮事件
     async showRightsDialog (arr) {
+      this.expandedKeys = []
+      console.log(arr)
       this.showRoleName = arr.roleName
       this.id = arr.id
       this.dialogVisible = true
@@ -144,27 +151,41 @@ export default {
       }
       this.rightsList = res.data
       // 调用获取权限树的函数
-      this.expandedTree(arr.children)
+      this.expandedTree(arr)
     },
     // 获取权限树的函数
     expandedTree  (data) {
-      this.expandedKeys = []
-      for (var i = 0; i < data.length; i++) {
-        if (data[i].children) {
-          for (let k = 0; k < data[i].children.length; k++) {
-            if (data[i].children[k].children) {
-              for (let y = 0; y < data[i].children[k].children.length; y++) {
-                // 循环data的数据，把对应要展开的节点id放入展开的数组中
-                this.expandedKeys.push(data[i].children[k].children[y].id)
-              }
-            } else {
-              continue
-            }
-          }
-        } else {
-          continue
-        }
+      // 递归写法
+      // 判断data里面是否有children,没有就讲data.id添加入expandedKeys数组
+      if (!data.children) {
+        return this.expandedKeys.push(data.id)
       }
+      // 否则将进入data.children遍历,再次调用expandedTree该函数
+      data.children.forEach(item => {
+        return this.expandedTree(item)
+      })
+      // this.expandedKeys = []
+      // for循环写法
+      // for (var i = 0; i < data.length; i++) {
+      //   if (data[i].children) {
+      //     for (let k = 0; k < data[i].children.length; k++) {
+      //       if (data[i].children[k].children) {
+      //         for (let y = 0; y < data[i].children[k].children.length; y++) {
+      //           // 循环data的数据，把对应要展开的节点id放入展开的数组中
+      //           this.expandedKeys.push(data[i].children[k].children[y].id)
+      //         }
+      //       } else {
+      //         continue
+      //       }
+      //     }
+      //   } else {
+      //     continue
+      //   }
+      // }
+    },
+    // 关闭修改权限对话框的时候置空expandedKeys数组
+    DialogClosed () {
+      // this.expandedKeys = []
     },
     // 确定修改权限的的按钮事件
     async showNewRights () {

@@ -6,13 +6,14 @@ import welcom from '../components/welcom.vue'
 import users from '../components/users.vue'
 import rights from '../components/rights/rights.vue'
 import roles from '../components/rights/roles.vue'
+import categories from '../components/goods/categories.vue'
 
 Vue.use(VueRouter)
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: login },
   {
-    path: '/home', component: home, redirect: '/welcom', children: [{ path: '/welcom', component: welcom }, { path: '/rights', component: rights }, { path: '/users', component: users }, { path: '/roles', component: roles }]
+    path: '/home', component: home, redirect: '/welcom', children: [{ path: '/welcom', component: welcom }, { path: '/rights', component: rights }, { path: '/users', component: users }, { path: '/roles', component: roles }, { path: '/categories', component: categories }]
   }
 ]
 
