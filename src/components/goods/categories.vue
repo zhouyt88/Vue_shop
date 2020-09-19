@@ -189,7 +189,7 @@ export default {
       console.log(res)
       this.addCateList = res.data
     },
-    // 确定添加分类的按钮
+    // 确定事件----添加分类弹出层的按钮
     addCateButton () {
       console.log(this.addForm)
       this.$refs.addCateFormRef.validate(async valid => {
@@ -201,10 +201,9 @@ export default {
         this.$Message.success('添加分类成功!')
       })
       this.getGoodsList()
-      this.$refs.addCateFormRef.resetFields()
-      console.log(this.addForm)
       this.clearCateButton()
     },
+    // 取消事件--添加分类弹出层的按钮
     clearCateButton () {
       this.dialogVisible = false
       this.$refs.addCateFormRef.resetFields()
