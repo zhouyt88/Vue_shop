@@ -20,13 +20,18 @@
       >
         <!-- 是否有效行 -->
         <template slot="isDeleted" scope="scope">
-          <span class="el-icon-success success-icon" v-if="scope.row.cat_deleted == false"></span>
+          <span
+            class="el-icon-success success-icon"
+            v-if="scope.row.cat_deleted == false"
+          ></span>
           <span class="el-icon-error error-icon" v-else></span>
         </template>
         <!-- 排序行 -->
         <template slot="isLevel" scope="scope">
           <el-tag v-if="scope.row.cat_level == 0">一级</el-tag>
-          <el-tag v-else-if="scope.row.cat_level == 1" type="success">二级</el-tag>
+          <el-tag v-else-if="scope.row.cat_level == 1" type="success"
+            >二级</el-tag
+          >
           <el-tag v-else type="danger">三级</el-tag>
         </template>
         <!-- 操作行 -->
@@ -52,8 +57,18 @@
       ></el-pagination>
     </el-card>
     <!-- 添加分类弹出层 -->
-    <el-dialog title="添加分类" :visible.sync="dialogVisible" width="50%" @close="clearCateButton">
-      <el-form :model="addForm" :rules="addFormRules" label-width="100px" ref="addCateFormRef">
+    <el-dialog
+      title="添加分类"
+      :visible.sync="dialogVisible"
+      width="50%"
+      @close="clearCateButton"
+    >
+      <el-form
+        :model="addForm"
+        :rules="addFormRules"
+        label-width="100px"
+        ref="addCateFormRef"
+      >
         <el-form-item label="分类名称:" prop="cat_name">
           <el-input v-model="addForm.cat_name" clearable></el-input>
         </el-form-item>

@@ -62,7 +62,6 @@
         <el-table-column prop="roleDesc" label="职位" width="150"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            {{scope.row.id}}
             <el-button type="primary" icon="el-icon-edit">修改</el-button>
             <el-button type="danger" icon="el-icon-delete">删除</el-button>
             <el-button type="warning" icon="el-icon-share" @click="showRightsDialog(scope.row)">分配权限</el-button>
