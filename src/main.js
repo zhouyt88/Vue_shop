@@ -6,6 +6,18 @@ import './assets/fonts/iconfont.css'
 import './assets/global.css'
 import axios from 'axios'
 import TreeTable from 'vue-table-with-tree-grid'
+// 定义一个时间过滤器
+Vue.filter('dataTime', function (t) {
+  const date = new Date(t)
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const datee = date.getDate()
+  var hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
+  var minute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+  var second = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
+  const time = year + '-' + month + '-' + datee + '  ' + hour + ':' + minute + ':' + second
+  return time
+})
 Vue.component('tree-Table', TreeTable)
 // 配置公共的请求头
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
