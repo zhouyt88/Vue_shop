@@ -12,7 +12,7 @@
     </el-header>
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside :width="isCollapse?'64px':'200px'">
+      <el-aside :width="isCollapse ? '64px' : '200px'">
         <div @click="isCollapse = !isCollapse">| | |</div>
         <el-menu
           background-color="#666c64"
@@ -24,19 +24,23 @@
           :collapse-transition="false"
           router
         >
-          <el-submenu v-for="(item,index) in menulist" :key="item.id" :index="index+''">
+          <el-submenu
+            v-for="(item, index) in menulist"
+            :key="item.id"
+            :index="index + ''"
+          >
             <template slot="title">
               <i :class="iconobj[item.id]"></i>
-              <span>{{item.authName}}</span>
+              <span>{{ item.authName }}</span>
             </template>
             <el-menu-item
               v-for="subItem in item.children"
               :key="subItem.id"
-              :index="'/'+subItem.path"
-              @click="savePath('/'+subItem.path)"
+              :index="'/' + subItem.path"
+              @click="savePath('/' + subItem.path)"
             >
               <span class="el-icon-menu"></span>
-              {{subItem.authName}}
+              {{ subItem.authName }}
             </el-menu-item>
           </el-submenu>
         </el-menu>
@@ -136,7 +140,9 @@ export default {
     box-sizing: border-box;
     background-color: #545c64;
     .el-menu {
-      width: 100%;
+      width: 200px !important;
+      box-sizing: border-box;
+      border: 0px;
     }
     .el-submenu {
       width: 100%;

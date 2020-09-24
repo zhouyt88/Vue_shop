@@ -10,13 +10,15 @@ import categories from '../components/goods/categories.vue'
 import params from '../components/goods/params.vue'
 import goods from '../components/goods/goods.vue'
 import add from '../components/goods/add.vue'
+import orders from '../components/orders.vue'
+import reports from '../components/reports.vue'
 
 Vue.use(VueRouter)
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: login },
   {
-    path: '/home', component: home, redirect: '/welcom', children: [{ path: '/welcom', component: welcom }, { path: '/rights', component: rights }, { path: '/users', component: users }, { path: '/roles', component: roles }, { path: '/categories', component: categories }, { path: '/params', component: params }, { path: '/goods', component: goods }, { path: '/goods/add', component: add }]
+    path: '/home', component: home, redirect: '/welcom', children: [{ path: '/welcom', component: welcom }, { path: '/rights', component: rights }, { path: '/users', component: users }, { path: '/roles', component: roles }, { path: '/categories', component: categories }, { path: '/params', component: params }, { path: '/goods', component: goods }, { path: '/goods/add', component: add }, { path: '/orders', component: orders }, { path: '/reports', component: reports }]
   }
 ]
 
