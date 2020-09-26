@@ -126,15 +126,15 @@ export default {
         type: 'warning'
       }).catch(err => err)
       if (result !== 'confirm') {
-        return this.$Message.info('已取消删除')
+        return this.$message.info('已取消删除')
       }
       console.log(role.id, rightId)
       const { data: res } = await this.$http.delete(`roles/${role.id}/rights/${rightId}`)
       if (res.meta.status !== 200) {
-        return this.$Message.error('删除指定权限失败!')
+        return this.$message.error('删除指定权限失败!')
       }
       console.log(res)
-      this.$Message.success('删除指定权限成功!')
+      this.$message.success('删除指定权限成功!')
       role.children = res.data
     },
     // 点击分配权限的按钮事件
@@ -146,7 +146,7 @@ export default {
       this.dialogVisible = true
       const { data: res } = await this.$http.get('rights/tree')
       if (res.meta.status !== 200) {
-        return this.$Message.error('获取权限失败!')
+        return this.$message.error('获取权限失败!')
       }
       this.rightsList = res.data
       // 调用获取权限树的函数
@@ -195,9 +195,9 @@ export default {
       // 向数据库发送更新数据
       const { data: res } = await this.$http.post(`roles/${this.id}/rights`, { rids: str3 })
       if (res.meta.status !== 200) {
-        return this.$Message.error('修改权限失败!')
+        return this.$message.error('修改权限失败!')
       }
-      this.$Message.success('修改权限成功!')
+      this.$message.success('修改权限成功!')
       //  重新获取权限数据
       this.getRolesList()
     }

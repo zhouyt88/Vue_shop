@@ -283,9 +283,9 @@ export default {
       const { data: res } = await this.$http.put(`users/${scope.id}/state/${scope.mg_state}`)
       console.log(res)
       if (res.meta.status !== 200) {
-        return this.$Message.error('修改用户状态失败!')
+        return this.$message.error('修改用户状态失败!')
       } else {
-        return this.$Message.success('修改用户状态成功!')
+        return this.$message.success('修改用户状态成功!')
       }
     },
     // 监听添加用户对话框的关闭事件
@@ -300,14 +300,14 @@ export default {
     addUser () {
       this.$refs.addFormRef.validate(async boo => {
         // 预校验
-        if (!boo) { return this.$Message.error('请填写完整信息') }
+        if (!boo) { return this.$message.error('请填写完整信息') }
         // 发送请求(添加用户)
         const { data: res } = await this.$http.post('users', this.addForm)
         console.log(res)
         if (res.meta.status !== 201) {
-          return this.$Message.error('添加用户失败')
+          return this.$message.error('添加用户失败')
         }
-        this.$Message.success('添加用户成功')
+        this.$message.success('添加用户成功')
         // 重新加载数据
         this.getUserList()
         // 关闭对话框
@@ -324,14 +324,14 @@ export default {
     editUser () {
       this.$refs.editFormRef.validate(async boo => {
         // 预校验
-        if (!boo) { return this.$Message.error('请填写完整信息') }
+        if (!boo) { return this.$message.error('请填写完整信息') }
         // 发送请求(添加用户)
         const { data: res } = await this.$http.put('users/' + this.editForm.id, { email: this.editForm.email, mobile: this.editForm.mobile })
         console.log(res)
         if (res.meta.status !== 200) {
-          return this.$Message.error('修改用户失败')
+          return this.$message.error('修改用户失败')
         }
-        this.$Message.success('修改用户成功')
+        this.$message.success('修改用户成功')
         // 重新加载数据
         this.getUserList()
         // 关闭对话框
@@ -349,15 +349,15 @@ export default {
         const { data: res } = await this.$http.delete('users/' + id)
         this.getUserList()
         if (res.meta.status !== 200) {
-          return this.Message.error({ message: '删除失败!' })
+          return this.message.error({ message: '删除失败!' })
         }
         console.log(res)
-        this.$Message({
+        this.$message({
           type: 'success',
           message: '删除成功!'
         })
       }).catch(() => {
-        this.$Message({
+        this.$message({
           type: 'info',
           message: '已取消删除'
         })
@@ -375,9 +375,9 @@ export default {
     async putRole () {
       const { data: res } = await this.$http.put(`users/${this.roleInfo.id}/role`, { rid: this.SetRoleId })
       if (res.meta.status !== 200) {
-        return this.$Message.error('设置角色失败！')
+        return this.$message.error('设置角色失败！')
       }
-      this.$Message.success('设置角色成功！')
+      this.$message.success('设置角色成功！')
       this.roleDialogVisible = false
       this.getUserList()
     }

@@ -135,6 +135,6 @@ Vue.use(Footer)
 Vue.use(Loading.directive)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
-Vue.prototype.$Message = Message
+Vue.prototype.$message = Message
 Vue.prototype.$messageBox = MessageBox
 Vue.prototype.$confirm = MessageBox.confirm

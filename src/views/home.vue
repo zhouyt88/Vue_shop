@@ -24,11 +24,7 @@
           :collapse-transition="false"
           router
         >
-          <el-submenu
-            v-for="(item, index) in menulist"
-            :key="item.id"
-            :index="index + ''"
-          >
+          <el-submenu v-for="(item, index) in menulist" :key="item.id" :index="index + ''">
             <template slot="title">
               <i :class="iconobj[item.id]"></i>
               <span>{{ item.authName }}</span>
@@ -84,7 +80,7 @@ export default {
     async getMenulist () {
       const { data: res } = await this.$http('menus')
       if (res.meta.status !== 200) {
-        return this.$Message.console.error('获取数据失败,请稍后重试')
+        return this.$message.console.error('获取数据失败,请稍后重试')
       }
       this.menulist = res.data
     },
@@ -140,7 +136,7 @@ export default {
     box-sizing: border-box;
     background-color: #545c64;
     .el-menu {
-      width: 200px !important;
+      width: 100% !important;
       box-sizing: border-box;
       border: 0px;
     }

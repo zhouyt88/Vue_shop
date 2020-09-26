@@ -204,7 +204,7 @@ export default {
     },
     beforeLeave (newTab, oldTab) {
       if (oldTab === '0' && this.cascValue.length !== 3) {
-        this.$Message.error('请选择商品分类')
+        this.$message.error('请选择商品分类')
         return false
       }
     },
@@ -249,7 +249,7 @@ export default {
     addProductButton () {
       this.$refs.addFormRef.validate(async val => {
         if (!val) {
-          return this.$Message.error('请填写商品必填项!')
+          return this.$message.error('请填写商品必填项!')
         }
         const newAddForm = JSON.parse(JSON.stringify(this.addForm))
         // 添加动态参数
@@ -271,9 +271,9 @@ export default {
         // 发送请求
         const { data: res } = await this.$http.post('goods', newAddForm)
         if (res.meta.status !== 201) {
-          return this.$Message.error('添加商品失败!')
+          return this.$message.error('添加商品失败!')
         }
-        this.$Message.success(res.meta.msg)
+        this.$message.success(res.meta.msg)
         // 页面跳转
         this.$router.push('/goods')
       })

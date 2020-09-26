@@ -9,11 +9,7 @@
     <!-- 卡片-表格 -->
     <el-card>
       <!-- 提醒 !注意 -->
-      <el-alert
-        title="注意: 只允许三级分类设置相关参数!"
-        type="warning"
-        class="el-icon-warning"
-      ></el-alert>
+      <el-alert title="注意: 只允许三级分类设置相关参数!" type="warning" class="el-icon-warning"></el-alert>
       <!-- 选择商品  联级选择 -->
       <div class="casc_box">
         选择商品分类:
@@ -33,8 +29,7 @@
             size="mini"
             :disabled="disabledButton"
             @click="addDialogVisible = true"
-            >添加参数</el-button
-          >
+          >添加参数</el-button>
           <!-- 动态参数表格 -->
           <el-table :data="manyData" style="width: 100%" border stripe>
             <el-table-column type="expand">
@@ -45,8 +40,7 @@
                   :key="index"
                   closable
                   @close="tagHandleClose(index, scope.row)"
-                  >{{ item }}</el-tag
-                >
+                >{{ item }}</el-tag>
                 <el-input
                   class="input-new-tag"
                   v-if="scope.row.inputVisible"
@@ -55,20 +49,17 @@
                   size="small"
                   @keyup.enter.native="handleInputConfirm(scope.row)"
                   @blur="handleInputConfirm(scope.row)"
-                >
-                </el-input>
+                ></el-input>
                 <el-button
                   v-else
                   class="button-new-tag"
                   size="small"
                   @click="showInput(scope.row)"
-                  >+ New Tag</el-button
-                >
+                >+ New Tag</el-button>
               </template>
             </el-table-column>
             <el-table-column type="index" label="#"></el-table-column>
-            <el-table-column prop="attr_name" label="参数名称">
-            </el-table-column>
+            <el-table-column prop="attr_name" label="参数名称"></el-table-column>
             <el-table-column label="操作">
               <template v-slot="scope">
                 <!-- 编辑按钮 -->
@@ -76,18 +67,16 @@
                   type="primary"
                   icon="el-icon-edit"
                   size="mini"
-                  slot-scope=""
+                  slot-scope
                   @click="editDialogButton(scope.row)"
-                  >编辑</el-button
-                >
+                >编辑</el-button>
                 <!-- 删除按钮 -->
                 <el-button
                   type="danger"
                   icon="el-icon-delete"
                   size="mini"
                   @click="deleteParamsButton(scope.row.attr_id)"
-                  >删除</el-button
-                >
+                >删除</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -99,8 +88,7 @@
             size="mini"
             :disabled="disabledButton"
             @click="addDialogVisible = true"
-            >添加属性</el-button
-          >
+          >添加属性</el-button>
           <!-- 静态属性表格 -->
           <el-table :data="onlyData" style="width: 100%" border stripe>
             <el-table-column type="expand">
@@ -111,8 +99,7 @@
                   :key="index"
                   closable
                   @close="tagHandleClose(index, scope.row)"
-                  >{{ item }}</el-tag
-                >
+                >{{ item }}</el-tag>
                 <el-input
                   class="input-new-tag"
                   v-if="scope.row.inputVisible"
@@ -121,20 +108,17 @@
                   size="small"
                   @keyup.enter.native="handleInputConfirm(scope.row)"
                   @blur="handleInputConfirm(scope.row)"
-                >
-                </el-input>
+                ></el-input>
                 <el-button
                   v-else
                   class="button-new-tag"
                   size="small"
                   @click="showInput(scope.row)"
-                  >+ New Tag</el-button
-                >
+                >+ New Tag</el-button>
               </template>
             </el-table-column>
             <el-table-column type="index" label="#"></el-table-column>
-            <el-table-column prop="attr_name" label="属性名称">
-            </el-table-column>
+            <el-table-column prop="attr_name" label="属性名称"></el-table-column>
             <el-table-column label="操作">
               <template v-slot="scope">
                 <!-- 编辑按钮 -->
@@ -143,16 +127,14 @@
                   icon="el-icon-edit"
                   size="mini"
                   @click="editDialogButton(scope.row)"
-                  >编辑</el-button
-                >
+                >编辑</el-button>
                 <!-- 删除按钮 -->
                 <el-button
                   type="danger"
                   icon="el-icon-delete"
                   size="mini"
                   @click="deleteParamsButton(scope.row.attr_id)"
-                  >删除</el-button
-                >
+                >删除</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -286,7 +268,7 @@ export default {
     addParams () {
       this.$refs.ruleForm.validate(async boo => {
         if (!boo) {
-          return this.$Message.error('请输入必填参数!')
+          return this.$message.error('请输入必填参数!')
         }
         const { data: res } = await this.$http.post(`categories/${this.seleckKeys[2]}/attributes`, {
           attr_name: this.addForm.attr_name,
@@ -294,9 +276,9 @@ export default {
         })
         // console.log(res)
         if (res.meta.status !== 201) {
-          return this.$Message.error('添加' + this.addText + '失败!')
+          return this.$message.error('添加' + this.addText + '失败!')
         }
-        this.$Message.success('添加' + this.addText + '成功!')
+        this.$message.success('添加' + this.addText + '成功!')
         // 重新获取参数/属性
         this.getPrarmsList()
         // 关闭弹出层
@@ -312,13 +294,13 @@ export default {
         type: 'warning'
       }).catch(err => err)
       if (result !== 'confirm') {
-        return this.$Message.info('已取消删除')
+        return this.$message.info('已取消删除')
       }
       const { data: res } = await this.$http.delete('categories/' + this.seleckKeys[2] + '/attributes/' + id)
       if (res.meta.status !== 200) {
-        return this.$Message.error('删除' + this.addText + '失败!')
+        return this.$message.error('删除' + this.addText + '失败!')
       }
-      this.$Message.success('删除' + this.addText + '成功!')
+      this.$message.success('删除' + this.addText + '成功!')
       // 重新获取参数/属性
       this.getPrarmsList()
     },
@@ -327,7 +309,7 @@ export default {
       console.log(this.editForm)
       this.$refs.ruleForm.validate(async boo => {
         if (!boo) {
-          return this.$Message.error('请输入必填参数!')
+          return this.$message.error('请输入必填参数!')
         }
         const { data: res } = await this.$http.put(`categories/${this.seleckKeys[2]}/attributes/${this.editForm.editId}`, {
           attr_name: this.editForm.attr_name,
@@ -335,9 +317,9 @@ export default {
         })
         console.log(res)
         if (res.meta.status !== 200) {
-          return this.$Message.error('修改' + this.addText + '失败!')
+          return this.$message.error('修改' + this.addText + '失败!')
         }
-        this.$Message.success('修改' + this.addText + '成功!')
+        this.$message.success('修改' + this.addText + '成功!')
         // 重新获取参数/属性
         this.getPrarmsList()
         // 关闭弹出层
@@ -390,9 +372,9 @@ export default {
           attr_vals: row.attr_vals.join(' ')
         })
       if (res.meta.status !== 200) {
-        return this.$Message.error(text + 'tag标签失败!')
+        return this.$message.error(text + 'tag标签失败!')
       }
-      this.$Message.success(text + 'tag标签成功!')
+      this.$message.success(text + 'tag标签成功!')
     }
   },
   created () {
@@ -420,5 +402,8 @@ export default {
   line-height: 30px;
   padding-top: 0;
   padding-bottom: 0;
+}
+.el-scrollbar__wrap {
+  height: 300px;
 }
 </style>

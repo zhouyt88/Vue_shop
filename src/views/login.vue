@@ -45,10 +45,10 @@ export default {
   methods: {
     submitForm (formName) {
       this.$refs[formName].validate(async (valid) => {
-        if (!valid) return this.$Message.warning({ message: '警告哦，账号或密码格式错误' })
+        if (!valid) return this.$message.warning({ message: '警告哦，账号或密码格式错误' })
         const { data: res } = await this.$http.post('login', this.formmsg)
         if (res.meta.status === 200) {
-          this.$Message({
+          this.$message({
             showClose: true,
             message: '登录成功!',
             type: 'success'
@@ -57,7 +57,7 @@ export default {
           sessionStorage.setItem('token', res.data.token)
           return this.$router.push('/home')
         }
-        this.$Message({
+        this.$message({
           showClose: true,
           message: '登录失败!',
           type: 'error'

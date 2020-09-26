@@ -142,13 +142,13 @@ export default {
         type: 'warning'
       }).catch(err => err)
       if (result !== 'confirm') {
-        return this.$Message.info('已取消删除')
+        return this.$message.info('已取消删除')
       }
       const { data: res } = await this.$http.delete('goods/' + id)
       if (res.meta.status !== 200) {
-        return this.$Message.error('删除商品失败!')
+        return this.$message.error('删除商品失败!')
       }
-      this.$Message.success('删除商品成功!')
+      this.$message.success('删除商品成功!')
       return this.getGoodsList()
     }
   }

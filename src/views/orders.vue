@@ -206,7 +206,7 @@ export default {
     confirmModifyAddressButton () {
       this.$refs.ruleForm.validate(item => {
         if (!item) {
-          return this.$Message.error('请填写必填项')
+          return this.$message.error('请填写必填项')
         }
         this.dialogVisible = false
       })
@@ -221,5 +221,8 @@ export default {
 <style lang="less">
 .el-cascader {
   width: 100%;
+}
+.el-table{
+  margin-top: 20px;
 }
 </style>

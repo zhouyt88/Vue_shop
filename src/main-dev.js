@@ -32,6 +32,7 @@ Vue.filter('dataTime', function (t) {
 })
 Vue.component('tree-Table', TreeTable)
 // 配置公共的请求头
+// axios.defaults.baseURL = 'http://118.190.160.53:8089/api/private/v1'
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 // 在请求头中挂在token令牌
 // axios设置请求拦截器
