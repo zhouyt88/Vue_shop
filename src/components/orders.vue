@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <!-- 面包屑导航 -->
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
@@ -106,6 +107,7 @@
         >
       </span>
     </el-dialog>
+
     <!-- 物流信息对话框 -->
     <el-dialog
       title="查看物流进度"
